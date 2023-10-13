@@ -1,0 +1,72 @@
+{% extends 'mbook.html' %}
+
+{% block content %}
+    <div id="account">
+        <div class="table-info">
+            <div class="top">
+                <div>
+                    <a type="button" class="btn btn-outline-secondary btn-sm add" href="/admin/add/">
+                        <i class="bi bi-plus-circle"></i>
+                        新增
+                    </a>
+                    <a type="button" class="btn btn-outline-secondary btn-sm add" href="/admin/up">已上架</a>
+                </div>
+                <div class="right">
+                    <form>
+                        <input placeholder="请输入需要查询的图书" name="search">
+                        <button type="submit" class="btn">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="card">
+                <h6 class="card-header">
+                    <i class="bi bi-list"></i>
+                    图书列表
+                </h6>
+                <div class="card-body">
+                    <table class="table">
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col">书名</th>
+                            <th scope="col">作者</th>
+                            <th scope="col">出版社</th>
+                            <th scope="col">出版日期</th>
+                            <th scope="col">价格</th>
+                            <th scope="col">短评</th>
+                            <th scope="col">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% if books %}
+                            {% for obj in books %}
+                                <tr>
+                                    <td>{{ obj.book_name }}</td>
+                                    <td>{{ obj.autor }}</td>
+                                    <td>{{ obj.publisher }}</td>
+                                    <td>{{ obj.publisher_data }}</td>
+                                    <td>{{ obj.price }}</td>
+                                    <td>
+                                        <div class="td-com">
+                                            {{ obj.comment }}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="td-op">
+                                            <a class="btn btn-primary" href="/admin/edit/{{ obj.id }}">编辑</a>
+                                            <a class="btn btn-primary" onclick="to_del('{{ obj.id }}')">删除</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        {% endif %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

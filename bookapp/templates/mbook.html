@@ -1,0 +1,296 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>电商图书</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        .nav_item, .content, .navbar-brand {
+            margin: 0 20px;
+        }
+
+        #message {
+            margin: 10px 5px;
+        }
+
+        .form-control {
+            height: 30px;
+            width: 100%;
+        }
+
+        .btn {
+            margin: 5px 0;
+            font-size: 10px;
+        }
+
+        .add {
+            margin-top: 10px;
+            margin-right: 5px;
+            width: 60px;
+            height: 30px;
+        }
+
+        .top {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .right {
+            margin: 10px 5px;
+        }
+
+        .zanwu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 100px;
+        }
+
+        .td-op {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .td-com {
+            width: 321px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .com, .nav-link {
+            margin: 10px 5px;
+            text-decoration: none;
+            color: #7f7f7f;
+        }
+
+        .comment {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .book {
+            margin-right: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .book1 {
+            width: 48px;
+            height: 48px;
+            margin: 10px 10px;
+            border: 2px solid #ccc;
+            box-shadow: 4px 2px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .text {
+            margin: 10px 10px;
+        }
+
+        .content1 {
+            margin-left: 50px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content2 {
+            display: flex;
+            flex-direction: column;
+            border-bottom: 1px solid #ccc;
+            color: #7f7f7f;
+        }
+
+        .content2 span {
+            margin: 5px 0;
+        }
+
+        .books {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .book .image {
+            margin-right: 10px;
+        }
+
+        .star-a {
+            color: #ffc400;
+        }
+
+        .com-left {
+            width: 750px;
+            float: left;
+        }
+
+        .book-img {
+            width: 200px;
+            float: right;
+            margin-top: 10px;
+        }
+
+        .book-img img {
+            width: 110px;
+            height: 160px;
+        }
+
+        .right {
+            display: block;
+        }
+
+        .right span {
+            color: #7f7f7f;
+            margin: 10px 0;
+        }
+
+        .zanwu span {
+            color: #7f7f7f;
+        }
+
+        .com-active {
+            color: rgba(0, 0, 0, 0.96);
+        }
+
+        .a-btn {
+            display: flex;
+            text-decoration: none;
+            color: #7f7f7f;
+            align-items: center;
+        }
+
+        .a-btn:hover {
+            color: black;
+            cursor: pointer;
+        }
+
+        .col-md-6 input {
+            margin: 10px 0;
+        }
+        .sen{
+            width: 400px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .sentiments{
+            display: flex;
+        }
+        .sen-left{
+            width: 550px;
+            float: left;
+        }
+        .sen-right{
+            width: 250px;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">豆瓣读书</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-link active" href="/admin/message/">图书爬取</a>
+            <a class="nav-link" href="/admin/account/">图书管理</a>
+            <a class="nav-link" href="/admin/comment/">图书评论</a>
+            <a class="nav-link" href="/admin/comment/analyze" >情感分析</a>
+        </div>
+    </div>
+</nav>
+<div class="content">
+{#    由于导航栏固定不变所以提供模板给其他页面继承    #}
+    {% block content %}
+
+    {% endblock %}
+</div>
+
+<script>
+    //点击message.html中的书名a标签跳转时携带书本参数
+    function getBookNum(bookNums, ebookid) {
+        window.location.href = '/admin/comment/' + bookNums + '/' + ebookid + '/';
+    }
+
+    //返回管理图书页面（account.html）
+    function goBack() {
+        window.location.href = "/admin/account";
+    }
+
+    //跳转编辑页面(edit.html)
+    function to_edit(value, id) {
+        event.preventDefault(); // 阻止默认的跳转行为
+
+        // 拼接URL时携带参数
+        let baseURL = '/admin/account/';
+        let queryParams = '';
+        if (value == 'edit') {
+            queryParams = 'edit/' + id + '/';
+            window.location.href = baseURL + queryParams;
+        }
+    }
+
+    //在本页面获取id参数(这个直接在account页面完成)
+    function to_del(id) {
+        event.preventDefault();
+        // 拼接URL时携带参数
+        let baseURL = '/admin/account/';
+        let queryParams = id + '/';
+        window.location.href = baseURL + queryParams;
+    }
+
+    //无数据跳转回首页
+    function to_message() {
+        window.location.href = "/admin/message";
+    }
+    //在评论中切换不同的评论（好、中、差）
+    function handleClick(event, value, num, id) {
+        event.preventDefault(); // 阻止默认的跳转行为
+
+        // 拼接URL时携带参数
+        let baseURL = '/admin/comment/';
+        let queryParams = '';
+
+        if (value === 'good') {
+            if (num == '' && id == '') {
+                queryParams = ''
+            } else {
+                queryParams = 'god/' + num + '/' + id + '/h';
+            }
+        } else if (value === 'avg') {
+            if (num == '' && id == '') {
+                queryParams = ''
+            } else {
+                queryParams = 'avg/' + num + '/' + id + '/m';
+            }
+
+        } else if (value === 'bad') {
+            if (num == '' && id == '') {
+                queryParams = ''
+            } else {
+                queryParams = 'bad/' + num + '/' + id + '/l';
+            }
+        } else if (value == 'all') {
+            queryParams = num + '/' + id + '/';
+        }
+
+        let url = baseURL + queryParams;
+        //跳转链接
+        window.location.href = url;
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/mhDoLbDldZc3qpsJHpLogda//BVZbgYuw6kof4u2FrCedxOtgRZDTHgHUhOCVim"
+        crossorigin="anonymous"></script>
+</body>
+</html>

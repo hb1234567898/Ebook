@@ -1,0 +1,42 @@
+{% extends 'mbook.html' %}
+
+{% block content %}
+    <div id="message">
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" class="form-control" placeholder="请输入要爬取的网址" aria-label="Username"
+                   aria-describedby="addon-wrapping" name="net">
+            <button type="submit" class="btn btn-primary">爬取</button>
+        </form>
+        <div class="books">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">书名</th>
+                    <th scope="col">作者</th>
+                    <th scope="col">出版社</th>
+                    <th scope="col">出版日期</th>
+                    <th scope="col">价格</th>
+                    <th scope="col">短评</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for book in book_data %}
+                    <tr>
+                        <td>
+                            <a href="#" onclick="getBookNum({{ book.book_num }}, {{ book.id }})">{{ book.book_name }}</a>
+                        </td>
+                        <td>{{ book.autor }} {{ book.translator }}</td>
+                        <td>{{ book.publisher }}</td>
+                        <td>{{ book.publisher_data }}</td>
+                        <td>{{ book.price }}</td>
+                        <td>{{ book.comment }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+

@@ -1,0 +1,39 @@
+{% extends 'comment.html' %}
+
+{% block comment %}
+    {% if percent_type == 'm' %}
+        {% for com in comments %}
+
+            <div class="content1">
+                <div class="book">
+                    <div class="reader">
+                        <img class="book1" src="{{ com.read_img }}">
+                        <span class="text">{{ com.reader }}</span>
+                        <span class="star-a">{{ com.star }}</span>
+                    </div>
+                </div>
+                <div class="reviews">
+                    <div class="content2">
+                        <span>{{ com.short_comm }}</span>
+                        <span>{{ com.time }}</span>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+        <div class="book-img">
+            <div class="right">
+                {% if book_names %}
+                    <div>
+                        <span>> {{ book_names }}</span>
+                    </div>
+                {% endif %}
+                {% if one_img %}
+                    <div>
+                        <img src="{{ one_img }}">
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

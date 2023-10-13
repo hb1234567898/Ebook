@@ -1,0 +1,45 @@
+{% extends 'mbook.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>情感分析结果</h1>
+    <div class="sentiments">
+        <div class="sen-left">
+            {% for item in data %}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">评论</th>
+                        <th scope="col">情感</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div class="sen">
+                                {{ item.comment }}
+                            </div>
+                        </td>
+                        <td>
+                            {% if item.score > 0.6 %}
+                                非常正面
+                            {% elif item.score > 0.3 %}
+                                正面
+                            {% elif item.score > 0.1 %}
+                                中性
+                            {% else %}
+                                负面
+                            {% endif %}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            {% endfor %}
+        </div>
+        <div class="sen-right">
+            <img class="sen-img" src="{% static 'image.png' %}">
+        </div>
+    </div>
+
+
+{% endblock %}

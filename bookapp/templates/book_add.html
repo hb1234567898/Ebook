@@ -1,0 +1,75 @@
+{% extends 'mbook.html' %}
+
+{% block content %}
+    <a class="a-btn" onclick="goBack()">
+        <svg t="1695351264043" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+             p-id="1910" width="16" height="16">
+            <path d="M662.656 169.344a32 32 0 0 0-40.832-3.648l-4.48 3.648-320 320a32 32 0 0 0-3.648 40.832l3.648 4.48 320 320a32 32 0 0 0 48.96-40.832l-3.648-4.48L365.248 512l297.408-297.344a32 32 0 0 0 3.648-40.832l-3.648-4.48z"
+                  p-id="1911" fill="#8a8a8a"></path>
+        </svg>
+        返回
+    </a>
+    <div class="card">
+        <div class="card-header">
+            <h6>
+                <i class="bi bi-list"></i>
+                新增图书
+            </h6>
+        </div>
+
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        {{ form.book_name.label_tag }}
+                        {{ form.book_name }}
+                        {% if form.book_name.errors %}
+                            <p class="text-danger">{{ form.book_name.errors }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6 form-group">
+                        {{ form.autor.label_tag }}
+                        {{ form.autor }}
+                        {% if form.autor.errors %}
+                            <p class="text-danger">{{ form.autor.errors }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        {{ form.publisher.label_tag }}
+                        {{ form.publisher }}
+                        {% if form.publisher.errors %}
+                            <p class="text-danger">{{ form.publisher.errors }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6 form-group">
+                        {{ form.publisher_data.label_tag }}
+                        {{ form.publisher_data }}
+                        {% if form.publisher_date.errors %}
+                            <p class="text-danger">{{ form.publisher_data.errors }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        {{ form.price.label_tag }}
+                        {{ form.price }}
+                        {% if form.price.errors %}
+                            <p class="text-danger">{{ form.price.errors }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6 form-group">
+                        {{ form.comment.label_tag }}
+                        {{ form.comment }}
+                        {% if form.comment.errors %}
+                            <p class="text-danger">{{ form.comment.errors }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">保存</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

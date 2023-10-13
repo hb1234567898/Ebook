@@ -1,0 +1,50 @@
+{% extends 'mbook.html' %}
+
+{% block content %}
+    <a class="a-btn" onclick="goBack()">
+        <svg t="1695351264043" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+             p-id="1910" width="16" height="16">
+            <path d="M662.656 169.344a32 32 0 0 0-40.832-3.648l-4.48 3.648-320 320a32 32 0 0 0-3.648 40.832l3.648 4.48 320 320a32 32 0 0 0 48.96-40.832l-3.648-4.48L365.248 512l297.408-297.344a32 32 0 0 0 3.648-40.832l-3.648-4.48z"
+                  p-id="1911" fill="#8a8a8a"></path>
+        </svg>
+        返回
+    </a>
+    <div class="card">
+        <h6 class="card-header">
+            <i class="bi bi-list"></i>
+            已上架图书
+        </h6>
+        <div class="card-body">
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">书名</th>
+                    <th scope="col">作者</th>
+                    <th scope="col">出版社</th>
+                    <th scope="col">出版日期</th>
+                    <th scope="col">价格</th>
+                    <th scope="col">短评</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if published %}
+                    {% for obj in published %}
+                        <tr>
+                            <td>{{ obj.book_name }}</td>
+                            <td>{{ obj.autor }}</td>
+                            <td>{{ obj.publisher }}</td>
+                            <td>{{ obj.publisher_data }}</td>
+                            <td>{{ obj.price }}</td>
+                            <td>
+                                <div class="td-com">
+                                    {{ obj.comment }}
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                {% endif %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

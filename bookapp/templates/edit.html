@@ -1,0 +1,56 @@
+{% extends 'mbook.html' %}
+
+{% block content %}
+    <a class="a-btn" onclick="goBack()">
+        <svg t="1695351264043" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+             p-id="1910" width="16" height="16">
+            <path d="M662.656 169.344a32 32 0 0 0-40.832-3.648l-4.48 3.648-320 320a32 32 0 0 0-3.648 40.832l3.648 4.48 320 320a32 32 0 0 0 48.96-40.832l-3.648-4.48L365.248 512l297.408-297.344a32 32 0 0 0 3.648-40.832l-3.648-4.48z"
+                  p-id="1911" fill="#8a8a8a"></path>
+        </svg>
+        返回
+    </a>
+    <div class="card">
+        <div class="card-header">
+            编辑图书
+        </div>
+        <!-- 表单和栅栏 -->
+        <form method="POST">
+            {% csrf_token %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="book_name">书名</label>
+                        {{ form.book_name }}
+                    </div>
+                    <div class="col-md-6">
+                        <label for="autor">作者</label>
+                        {{ form.autor }}
+                    </div>
+                    <div class="col-md-6">
+                        <label for="publisher">出版社</label>
+                        {{ form.publisher }}
+                    </div>
+                    <div class="col-md-6">
+                        <label for="publisher_data">出版日期</label>
+                        {{ form.publisher_data }}
+                    </div>
+                    <div class="col-md-6">
+                        <label for="price">价格</label>
+                        {{ form.price }}
+                    </div>
+                    <div class="col-md-6">
+                        <label for="comment">短评</label>
+                        {{ form.comment }}
+                    </div>
+                    <div class="col-md-6">
+                        <label for="comment">是否上架</label>
+                        {{ form.is_published }}
+                    </div>
+
+                </div>
+                <button type="submit" class="btn btn-primary">保存</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
